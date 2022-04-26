@@ -31,31 +31,18 @@ namespace MyTech.Weather.UI
         private void MakeDataTableAndDisplay()
         {
             DataTable table = new DataTable();
-            DataColumn column;
-            DataRow row;
-            DataView view;
 
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.String");
-            column.ColumnName = "city";
-            table.Columns.Add(column);
+            table.Columns.Add("name", typeof(string));
+            table.Columns.Add("tmp", typeof(float));
 
-            column = new DataColumn();
-            column.DataType = Type.GetType("System.Decimal");
-            column.ColumnName = "tmp";
-            table.Columns.Add(column);
-
-            var lines = aPI.Load();
-            foreach (var item in lines.Values)
+            var List = aPI.Load();
+            foreach (var item in List)
             {
-                row = table.NewRow();
-                row["city"] = item.location.name;
-                row["tmp"] = item.current.temp_c;
-                table.Rows.Add(row);
+                table.Rows.Add(item.Key, item.Value.current.temp_c);
             }
 
-            view = new DataView(table);
-            dataGridView1.DataSource = view;
+           
+            dataGridView1.DataSource = table;
         }
 
         private async void button1_Click_1(object sender, EventArgs e)
