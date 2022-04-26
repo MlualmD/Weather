@@ -30,10 +30,12 @@ namespace MyTech.Weather.UI
         }
         private void MakeDataTableAndDisplay()
         {
+
             DataTable table = new DataTable();
 
             table.Columns.Add("name", typeof(string));
             table.Columns.Add("tmp", typeof(float));
+
 
             var citiesFromFile = aPI.Load();
             foreach (var city in citiesFromFile)
@@ -76,7 +78,10 @@ namespace MyTech.Weather.UI
         private void button4_Click(object sender, EventArgs e)
         {
             var file = aPI.LoadOneCity();
+            label4.Visible = true;
+            pictureBox1.Visible = true;
             label4.Text = file.current.temp_c.ToString();
+            pictureBox1.Load($"http:{file.current.condition.icon }");
         }
 
         private async void button5_Click(object sender, EventArgs e)
