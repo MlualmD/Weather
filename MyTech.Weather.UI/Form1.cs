@@ -35,10 +35,10 @@ namespace MyTech.Weather.UI
             table.Columns.Add("name", typeof(string));
             table.Columns.Add("tmp", typeof(float));
 
-            var List = aPI.Load();
-            foreach (var item in List)
+            var citiesFromFile = aPI.Load();
+            foreach (var city in citiesFromFile)
             {
-                table.Rows.Add(item.Key, item.Value.current.temp_c);
+                table.Rows.Add(city.Key, city.Value.current.temp_c);
             }
 
            
